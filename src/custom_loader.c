@@ -17,7 +17,9 @@ static int custom_fid = -1;
 static TempoInfoPoint *new_tempo_map;
 static BeatInfo *new_beat_map;
 static TimeSigChange *new_measure_map;
-static BarInfo * new_bars[4];
+
+static GameGem *new_gems[4];
+static BarInfo *new_bars[4];
 
 int start_custom_load(char const *custom_path) {
   if (custom_fid >= 0){
@@ -41,6 +43,11 @@ int start_custom_load(char const *custom_path) {
   }
 
   for (int i = 0; i < 4; i++){
+    if (new_gems[i] != NULL){
+      psp_free(new_gems[i]);
+      new_gems[i] = NULL;
+    }
+
     if (new_bars[i] != NULL){
       psp_free(new_bars[i]);
       new_bars[i] = NULL;
@@ -119,7 +126,7 @@ static void replace_bars(BarInfo *bars, uint32_t count, uint32_t track){
 }
 
 static int read_map_section(void **map_ptr, size_t data_size) {
-  size_t count;
+  size_t count = 0;
 
   if (custom_fid < 0){
     return custom_fid;
@@ -166,6 +173,10 @@ void set_load_difficulty(uint32_t difficulty) {
 
 
 void load_gems(STAllocator *allocator) {
+  if (custom_fid < 0) {
+    return;
+  }
+
   for (int i = 0; i < 4; i++){
     // Read the number of gems for the instrument
     int num_gems;
@@ -174,15 +185,21 @@ void load_gems(STAllocator *allocator) {
 
     // Buffer and read gem data for instrument
     GameGem *gem_alloc = (GameGem *)(st_alloc(allocator, gem_size, 4));
+
+    // Try to fall back to heap
+    if (!gem_alloc) {
+      new_gems[i] = (GameGem *)psp_malloc(gem_size);
+      gem_alloc = new_gems[i];
+    }
+
     sceIoRead(custom_fid, gem_alloc, gem_size);
     replace_gems(gem_alloc, num_gems, i);
   }
 
 }
 
-
 void load_bars(){
-  if (custom_fid == -1){
+  if (custom_fid < 0){
     return;
   }
 
