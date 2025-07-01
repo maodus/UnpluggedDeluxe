@@ -46,11 +46,6 @@ This rendition of Rock Band customs is in no way comparable to the quality of tr
 
 Despite the shortcomings, I hope some of you can enjoy some custom content in Rock Band Unplugged for the first time since its release! I will try to keep improving this plugin, but doing so will take a lot of time. Thank you for understanding.
 
-## Support
-If you'd like to support me in developing this plugin, feel free to contribute. Your support means a lot to me!
-
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D31BH824)
-
 ## Acknowledgements
 
 This project would not have been possible without help from the following:
