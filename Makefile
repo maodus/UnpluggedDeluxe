@@ -3,6 +3,7 @@ TARGET = build/UnpluggedDeluxe
 INCDIR = include
 
 OBJS = src/imports.o \
+	src/hook_game_init.o \
 	src/stalloc.o \
 	src/utils.o \
 	src/custom_man.o \

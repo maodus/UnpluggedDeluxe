@@ -37,6 +37,8 @@ int bPPSSPP = 0;
 // Imports
 extern void sceKernelDcacheWritebackInvalidateAll(void);
 extern void sceKernelIcacheInvalidateAll(void);
+extern void h_game_init(void);
+
 
 //
 // CheckModules
@@ -143,7 +145,7 @@ int inject_custom(int unk, int start_track){
   }
 
   // Init bump allocator at the end of the game's string table
-  st_alloc_init(&allocator, (void *)(0x096F0420));
+  st_alloc_init(&allocator, (void *)(0x096F0420), 50000);
 
   // TODO: IO Error handling
   load_tempo_map();
@@ -177,38 +179,6 @@ static int snoop_open_async(const char *filename, int flags, int mode){
   last_file[MAX_FILE_PATH_LEN - 1] = '\0';
   return npdrm_sceIoOpenAsync(filename, flags, mode);
 }
-
-/* TODO: Maybe export and link to a .S file for this function
-* psp-gcc ignores the naked attribute. This might corrupt the stack 
-* depending on the generated asm. So far it doesn't look like it does
-* but it might be better practice to do so. */
-void __attribute__((naked)) h_game_init()  {
-  /* We are hijacking an indirect branch (jr) that expects
-    * registers to be preserved, so we cant hijack normally. */
-  __asm__ volatile (
-    ".set push\n\t"
-    ".set noreorder \n\t"
-    "addiu $sp, $sp, -16 \n\t" // Bump sp
-    "sw $ra, 0($sp) \n\t"  // Save ra
-    "sw $a0, 4($sp) \n\t"  // Save a0
-    //"sw $a1, 8($sp) \n\t"  // Save a1
-
-    "jal inject_custom \n\t" // Call hook
-    "sw $t9, 12($sp) \n\t" // Save t9
-      
-    "move $a1, $v0\n\t"
-    "lw $ra, 0($sp) \n\t"  // Pop ra
-    "lw $a0, 4($sp) \n\t"  // Pop a0
-    //"lw $a1, 8($sp) \n\t"  // Pop a1
-    "lw $t9, 12($sp) \n\t" // Pop t9
-
-    "jr $t9 \n\t" // Return to proper program control flow
-    "addiu $sp, $sp, 16 \n\t" // Reset sp
-    ".set pop\n\t"
-  );
-}
-
-
 
 static int (*verify_files)(uint32_t *param_1,uint32_t *param_2);
 static int h_verify_files(uint32_t *param_1,uint32_t *param_2){
