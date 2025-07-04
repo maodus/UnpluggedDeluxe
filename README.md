@@ -17,7 +17,7 @@ Firstly, make sure you are using an up-to-date revision of CFW. Next, you will n
 Simply create a folder named `UnpluggedDeluxe` in your PPSSPP plugin directory. Then, download the PPSSPP version of this plugin. Afterwards, drag-and-drop both `UnpluggedDeluxe.prx` and `plugin.ini` into the directory you just created.
 
 ## Custom Songs
-For conversion of custom audio, please use ATMTool, and for custom chart conversion, please use mid2rbu. Additionally, the installation of custom songs may corrupt your save file. Make sure to backup your save file before attempting to install custom songs.
+For conversion of custom audio, please use [ATMTool](https://github.com/maodus/ATMTool), and for custom chart conversion, please use [mid2rbu](https://github.com/maodus/mid2rbu). Additionally, the installation of custom songs may corrupt your save file. Make sure to backup your save file before attempting to install custom songs.
 
 Firstly, you will have to have atleast two DLC songs present on your system of choice. The first one has to be **YOURENOROCKNROLLFUN**. The second one can be any song, but I recommend using **CONSTANTMOTION**, more on that soon. DLC content can be found in `ms0:/PSP/GAME/ULUS1048/MUSIC/`.
 
