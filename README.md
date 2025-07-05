@@ -41,7 +41,7 @@ After navigating to this directory, you will find a list of DLC subdirectories (
 	└── YOURENOROCKNROLLFUN/</code> </pre>
 
 
-The first step in the custom installation process will be to simply copy and paste any of your subdirectories (*preferably CONSTANTMOTION*) and rename it to `ZSONGNAME`. The **Z** prefix is necessary because it is how the plugin recognizes custom content. All custom content **MUST** be prefixed with a **Z**.
+The first step in the custom installation process will be to simply copy and paste any of your subdirectories (*preferably CONSTANTMOTION*) and rename it to `ZSONGNAME`. For example, if you were importing the song *Know Your Enemy*, you would name the folder `ZKNOWYOURENEMY`. The **Z** prefix is necessary because it is how the plugin recognizes custom content. All custom content **MUST** be prefixed with a **Z**.
 
  **CONSTANTMOTION** is recommended as the DLC of choice because it has the longest running time (06:57). Any standard DLC song shorter than the running time of the song you import will end abruptly.
 
