@@ -53,7 +53,7 @@ After creating the new custom DLC subdirectory, you DLC folder should look somet
 	├── YOURENOROCKNROLLFUN/
 	└── ZSONGNAME/</code> </pre>
  
-Now the rest of this installation process assumes you are in possession of a custom `.rbu` and `.ATM` file, if you do not have these, please the read the instructions on custom audio and custom chart/metadata creation. Next, please make sure to rename your `.rbu` file and `.ATM` file to the exact same **uppercase** name as the DLC folder you created in the last step (i.e. `ZSONGNAME`). Once you have obtained a `ZSONGNAME.rbu` (chart/metadata) file and a `ZSONGNAME.ATM` (audio) file, place them into the new folder you just created. Make sure you delete the previous `.ATM` file from the old song you had originally copied. Your custom subdirectory should look something like this after following these steps:
+Now the rest of this installation process assumes you are in possession of a custom `.rbu` and `.ATM` file, if you do not have these, please the read the instructions on [custom audio](https://github.com/maodus/UnpluggedDeluxe#custom-audio) and [custom chart/metadata](https://github.com/maodus/UnpluggedDeluxe#custom-chartsmetadata) creation. Next, please make sure to rename your `.rbu` file and `.ATM` file to the exact same **uppercase** name as the DLC folder you created in the last step (i.e. `ZSONGNAME`). Once you have obtained a `ZSONGNAME.rbu` (chart/metadata) file and a `ZSONGNAME.ATM` (audio) file, place them into the new folder you just created. Make sure you delete the previous `.ATM` file from the old song you had originally copied. Your custom subdirectory should look something like this after following these steps:
 
 <pre> <code> ZSONGNAME/
 	├── TEXT/
