@@ -10,13 +10,15 @@ This plugin can be installed on both official hardware and emulators. However, i
 
 ### PSP (Retail Hardware)
 
-Firstly, make sure you are using an up-to-date revision of CFW. Next, you will need to install the plugin np loader mod. Next, download the PSP version of this plugin from the releases section. Inside of the archive, you will find two files: `UDBootsrap.prx` and `UnpluggedDeluxe.prx`. You will **ONLY** want to install the `UDBootstrap.prx` plugin on your system. Make sure to install the bootstrapper for the game id `ULUS1048`. The bootstrapper is used to load  `UnpluggedDeluxe.prx` into user-space. Make sure **BOTH** `prx` files are in the **SAME** directory on your system.
+Firstly, make sure you are using an up-to-date revision of CFW. Next, you will need to install the plugin [nploader mod](https://github.com/lusid1/nploader_mod). Next, download the PSP version of this plugin from the releases section. Inside of the archive, you will find two files: `UDBootsrap.prx` and `UnpluggedDeluxe.prx`. You will **ONLY** want to install the `UDBootstrap.prx` plugin on your system. Make sure to install the bootstrapper for the game id `ULUS10418`. The bootstrapper is used to load  `UnpluggedDeluxe.prx` into user-space. Make sure **BOTH** `prx` files are in the **SAME** directory on your system.
 
 ### PPSSPP (Emulator)
 
 Simply create a folder named `UnpluggedDeluxe` in your PPSSPP plugin directory. Then, download the PPSSPP version of this plugin. Afterwards, drag-and-drop both `UnpluggedDeluxe.prx` and `plugin.ini` into the directory you just created.
 
 ## Custom Songs
+
+- For the best experience when playing custom songs, please enable "No Solos" which can be found in the game's main menu (Extras -> Modify Game).
 
 ### Custom Audio
 Rock Band Unplugged utilizes custom encrypted audio in the form of `.ATM` files for playing a song's audio tracks within the game. Beneath the encryption, these `.ATM` files contain your standard 4 instrument tracks (drum, bass, guitar, and vocal), with the addition of an addtional audio track for miscellanious sound effects. I have written a tool that allows for the creation of this audio file format, so please follow the necessary steps found on [ATMTool's](https://github.com/maodus/ATMTool) repo. This procedure is mandatory for your custom song to have custom audio. After following the encryption and conversion processes listed on the ATMTool repo, you will have obtained a `.ATM` file that can be used in-game.
@@ -31,11 +33,11 @@ Please keep backups of your mid2rbu config and any midi tracks. The parser will 
 ### Custom Song Installation
 > WARNING: The installation of custom songs may corrupt your save file. Make sure to backup your save file before attempting to install custom songs.
 
-Firstly, you will have to have atleast two DLC songs present on your system of choice. The first one has to be **YOURENOROCKNROLLFUN**. The second one can be any song, but I recommend using **CONSTANTMOTION**, more on that soon. DLC content can be found in `ms0:/PSP/GAME/ULUS1048/MUSIC/`, or if you are emulating, `PPSSPP_INSTALL_DIR/PSP/GAME/ULUS1048/MUSIC/`.
+Firstly, you will have to have atleast two DLC songs present on your system of choice. The first one has to be **YOURENOROCKNROLLFUN**. The second one can be any song, but I recommend using **CONSTANTMOTION**, more on that soon. DLC content can be found in `ms0:/PSP/GAME/ULUS10418/MUSIC/`, or if you are emulating, `PPSSPP_INSTALL_DIR/PSP/GAME/ULUS10418/MUSIC/`.
 
 After navigating to this directory, you will find a list of DLC subdirectories (assuming you have some) that may look something like this:
 
-<pre> <code> PSP/GAME/ULUS1048/MUSIC/
+<pre> <code> PSP/GAME/ULUS10418/MUSIC/
 	├── CONSTANTMOTION/
 	├── .../
 	└── YOURENOROCKNROLLFUN/</code> </pre>
@@ -47,7 +49,7 @@ The first step in the custom installation process will be to simply copy and pas
 
 After creating the new custom DLC subdirectory, you DLC folder should look something like this:
 
-<pre> <code> PSP/GAME/ULUS1048/MUSIC/
+<pre> <code> PSP/GAME/ULUS10418/MUSIC/
 	├── CONSTANTMOTION/
 	├── .../
 	├── YOURENOROCKNROLLFUN/
