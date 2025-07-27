@@ -4,7 +4,7 @@ INCDIR = include
 
 OBJS = src/imports.o \
 	src/hook_game_init.o \
-	src/stalloc.o \
+	src/bump_alloc.o \
 	src/utils.o \
 	src/custom_man.o \
 	src/custom_loader.o \

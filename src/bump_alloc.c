@@ -1,12 +1,12 @@
-#include "allocation/stalloc.h"
+#include "allocation/bump_alloc.h"
 
-void st_alloc_init(STAllocator *allocator, void *start, size_t size) {
+void bump_alloc_init(BumpAllocator *allocator, void *start, size_t size) {
     allocator->start = start;
     allocator->offset = 0;
     allocator->size = size;
 }
 
-void *st_alloc(STAllocator *allocator, size_t size, size_t align) {
+void *bump_alloc(BumpAllocator *allocator, size_t size, size_t align) {
 	const size_t mask = align - 1;
 	const size_t aligned_offset = (allocator->offset + mask) & ~mask;
 	const size_t new_offset = aligned_offset + size;
