@@ -43,7 +43,7 @@ void discover_customs(CustomManager *custom_man){
     strncpy(custom->name_internal, dir_ent.d_name, MAX_CUSTOM_LEN - 1);
     custom->name_internal[MAX_CUSTOM_LEN - 1] = '\0';
 
-    //sceKernelPrintf("Located custom song: %s\n", custom->name_internal);
+    sceKernelPrintf("Located custom song: %s\n", custom->name_internal);
 
     create_custom_path(custom->name_internal, custom_path);
     to_lower_str(custom->name_internal); // RBU wants this string to be lower case
