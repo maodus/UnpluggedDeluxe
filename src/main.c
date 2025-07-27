@@ -11,7 +11,8 @@
 #include "custom/custom_song.h"
 #include "custom/custom_man.h"
 #include "custom/custom_loader.h"
-#include "allocation/stalloc.h"
+#include "allocation/bump_alloc.h"
+#include "allocation/pspmalloc.h"
 #include "common.h"
 #include "utils.h"
 
@@ -114,7 +115,8 @@ int module_stop (SceSize args, void *argp){
 // End of PPSSPP Boilerplate code //
 
 static char last_file[256] __attribute__((aligned(4))); // Path of last opened .ATM file
-static STAllocator allocator __attribute__((aligned(4)));
+static void *fixed_heap __attribute__((aligned(4))); // Path of last opened .ATM file
+static BumpAllocator allocator __attribute__((aligned(4)));
 static CustomManager custom_man __attribute__((aligned(4)));
 
 int inject_custom(int unk, int start_track){
@@ -144,23 +146,24 @@ int inject_custom(int unk, int start_track){
     return start_track;
   }
 
-  // Init bump allocator at the end of the game's string table
-  st_alloc_init(&allocator, (void *)(0x096F0420), 50000);
+  bump_alloc_init(&allocator, fixed_heap, 0x80000 - 8);
 
   // TODO: IO Error handling
-  load_tempo_map();
-  load_beat_map();
-  load_measure_map();
+  load_tempo_map(&allocator);
+  load_beat_map(&allocator);
+  load_measure_map(&allocator);
 
-  set_load_difficulty(**((uint32_t **)0x096e9b54));
 
-  load_gems(&allocator);
-  load_bars();
+  uint32_t difficulty = **((uint32_t **)0x096e9b54);
+  set_load_difficulty(difficulty);
+
+  load_gems(&allocator, difficulty);
+  load_bars(&allocator);
+  load_solos(&allocator);
   end_custom_load();
   
   const int initial_track = custom->initial_track;
   _sw(initial_track, INITIAL_TRACK1_ADDR);
-  _sw(initial_track, INITIAL_TRACK2_ADDR);
   _sw(initial_track, CURRENT_TRACK_ADDR);
 
   return initial_track;
@@ -272,8 +275,10 @@ static void check_song_end(int argc, void *argv){
 
 }
 
-
 int main_init() {
+  sceKernelPrintf("Unplugged Deluxe started\n");
+
+  sceKernelPrintf("Patching functions\n");
   // Get address of np_loader_mod patched sceIoOpenAsync
   npdrm_sceIoOpenAsync = (int (*)(const char *, int, int))(
       JUMP_TARGET(*(uint32_t *)(JAL_OPEN_ASYNC))
@@ -292,15 +297,19 @@ int main_init() {
   _sw(MAKE_CALL(&h_verify_files), JAL_VERIFY_FILES);
 
   sceKernelDcacheWritebackAll();
-  init_custom_manager(&custom_man);
-  discover_customs(&custom_man);    
   sceKernelIcacheInvalidateAll();
 
+  sceKernelPrintf("Discovering custom songs\n");
+  init_custom_manager(&custom_man);
+  discover_customs(&custom_man);
+  
   int thid = sceKernelCreateThread("end_song_thrd", check_song_end, 64, 0x400, 0, NULL);
 
   if (thid >= 0){
     sceKernelStartThread(thid, 0, NULL);
   }
 
+  fixed_heap = psp_malloc(0x80000);
+  sceKernelPrintf("Unplugged Deluxe fixed heap init at: %08X\n", fixed_heap);
   return 0;
 }
