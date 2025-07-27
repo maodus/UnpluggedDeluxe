@@ -18,7 +18,7 @@ Simply create a folder named `UnpluggedDeluxe` in your PPSSPP plugin directory. 
 
 ## Custom Songs
 
-- For the best experience when playing custom songs, please enable "No Solos" which can be found in the game's main menu (Extras -> Modify Game).
+- If you are not satisfied with the solo phrases on your custom track, please enable "No Solos" which can be found in the game's main menu (Extras -> Modify Game).
 
 ### Custom Audio
 Rock Band Unplugged utilizes custom encrypted audio in the form of `.ATM` files for playing a song's audio tracks within the game. Beneath the encryption, these `.ATM` files contain your standard 4 instrument tracks (drum, bass, guitar, and vocal), with the addition of an addtional audio track for miscellanious sound effects. I have written a tool that allows for the creation of this audio file format, so please follow the necessary steps found on [ATMTool's](https://github.com/maodus/ATMTool) repo. This procedure is mandatory for your custom song to have custom audio. After following the encryption and conversion processes listed on the ATMTool repo, you will have obtained a `.ATM` file that can be used in-game.
