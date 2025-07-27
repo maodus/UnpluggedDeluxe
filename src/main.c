@@ -115,7 +115,7 @@ int module_stop (SceSize args, void *argp){
 // End of PPSSPP Boilerplate code //
 
 static char last_file[256] __attribute__((aligned(4))); // Path of last opened .ATM file
-static void *fixed_heap __attribute__((aligned(4))); // Path of last opened .ATM file
+static void *fixed_heap __attribute__((aligned(4))); // Fixed heap for custom songs
 static BumpAllocator allocator __attribute__((aligned(4)));
 static CustomManager custom_man __attribute__((aligned(4)));
 
@@ -239,8 +239,6 @@ static int h_verify_files(uint32_t *param_1,uint32_t *param_2){
   }
   return verify_files(param_1, param_2);
 }
-//09781cb0 Begining of game gems
-//08aaf110
 
 static uint32_t last_tick;
 static void check_song_end(int argc, void *argv){
